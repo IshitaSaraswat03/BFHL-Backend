@@ -37,7 +37,7 @@ app.post('/bfhl', (req, res) => {
         alphabets: alphabets,
         highest_alphabet: highestAlphabet
     });
-});s
+});
 
 // GET Endpoint
 app.get('/bfhl', (req, res) => {
