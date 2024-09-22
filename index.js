@@ -23,9 +23,11 @@ app.post('/bfhl', (req, res) => {
     }
 
     // Separate numbers and alphabets
-    const numbers = data.filter(item => !isNaN(item));
-    const alphabets = data.filter(item => isNaN(item));
-    const highestAlphabet = alphabets.length ? [alphabets.sort((a, b) => b.localeCompare(a, undefined, {sensitivity: 'base'}))[0]] : [];
+    const numbers = data.filter(item => !isNaN(item) && item.trim() !== '' && !isNaN(Number(item)));
+    const alphabets = data.filter(item => /^[a-zA-Z]+$/.test(item));
+    
+    // Sort and find highest alphabet (if any)
+    const highestAlphabet = alphabets.length ? [alphabets.sort((a, b) => b.localeCompare(a, undefined, { sensitivity: 'base' }))[0]] : [];
 
     // Respond with the required structure
     res.json({
@@ -48,3 +50,4 @@ app.get('/bfhl', (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
